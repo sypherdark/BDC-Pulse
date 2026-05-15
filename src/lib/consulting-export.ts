@@ -6,8 +6,6 @@ import { generateDataProduct } from "@/lib/data-product";
 import { buildMigrationPdf, type PdfBranding } from "@/lib/pdf";
 import type { AnalysisResult, DataProductBlueprint } from "@/lib/types";
 
-export type ConsultingExportFilename = "consulting" | "quatelio";
-
 function resolveBlueprint(asset: AssetRecord, analysis: AnalysisResult): DataProductBlueprint {
   const fresh = generateDataProduct(analysis);
   if (!asset.blueprintJson) return fresh;
@@ -92,9 +90,8 @@ export async function buildConsultingExportZip(params: {
   asset: AssetRecord;
   project: ProjectRecord | null;
   branding: PdfBranding;
-  filenameVariant?: ConsultingExportFilename;
 }): Promise<{ buffer: Buffer; filename: string }> {
-  const { asset, project, branding, filenameVariant = "consulting" } = params;
+  const { asset, project, branding } = params;
   const analysis = analysisFromAssetRow(asset);
   const blueprint = resolveBlueprint(asset, analysis);
   const generatedAt = new Date().toISOString();
@@ -211,9 +208,8 @@ export async function buildConsultingExportZip(params: {
     );
   }
 
-  const prefix = filenameVariant === "quatelio" ? "bdc-pulse-quatelio-export" : "bdc-pulse-consulting-export";
   return {
     buffer: zip.toBuffer(),
-    filename: `${prefix}-${asset.id}.zip`,
+    filename: `bdc-pulse-consulting-export-${asset.id}.zip`,
   };
 }

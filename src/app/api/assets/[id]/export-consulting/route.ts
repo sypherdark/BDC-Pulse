@@ -43,7 +43,6 @@ export async function GET(_: Request, context: { params: Promise<{ id: string }>
         confidentialityFooter ?? "CONFIDENTIAL · For authorized recipients only.",
       logoBase64,
     },
-    filenameVariant: "consulting",
   });
 
   return new NextResponse(new Uint8Array(buffer), {
