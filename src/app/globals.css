@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --color-background: #f4f8ff;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-border: #dbe7ff;
+  --color-primary: #0a6ed1;
+  --color-primary-foreground: #ffffff;
+  --color-muted: #e8eefb;
+  --color-muted-foreground: #475569;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground font-sans;
+}

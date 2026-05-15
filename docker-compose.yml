@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  bdc-pulse:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bdc-pulse:latest
+    container_name: bdc-pulse
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./bdc-pulse.sqlite:/app/bdc-pulse.sqlite
+    restart: unless-stopped

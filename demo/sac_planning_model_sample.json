@@ -1,0 +1,11 @@
+{
+  "planningModelName": "SAC_PLANNING_2026",
+  "type": "planning_model",
+  "versioning": true,
+  "hierarchy": null,
+  "script": "advanced_formula_runtime_script",
+  "entities": {
+    "dimensions": ["cost_center", "company_code", "country"],
+    "measures": ["plan_sales", "plan_margin", "plan_cost"]
+  }
+}

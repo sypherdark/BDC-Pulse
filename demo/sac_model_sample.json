@@ -1,0 +1,16 @@
+{
+  "modelName": "SAC_SALES_MODEL",
+  "type": "model",
+  "dimensions": ["company", "product", "fiscal_period", "region"],
+  "measures": ["revenue", "cost", "margin"],
+  "calculations": [
+    "gross_margin",
+    "gross_margin_pct",
+    "price_variance",
+    "volume_variance",
+    "opex_ratio",
+    "ebitda",
+    "cash_conversion"
+  ],
+  "semanticLayer": false
+}

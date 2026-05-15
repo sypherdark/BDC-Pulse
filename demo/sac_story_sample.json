@@ -1,0 +1,10 @@
+{
+  "storyName": "Executive Sales Story",
+  "type": "story",
+  "connectionType": "live connection",
+  "widgets": [
+    { "kind": "chart", "calculation": "margin_ratio" },
+    { "kind": "table", "calculation": "rolling_12m_revenue" }
+  ],
+  "notes": ["classic story", "geo map legacy"]
+}
