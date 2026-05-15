@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { collectJsonFromUpload } from "@/lib/extract-uploads";
-import { parseSacPortfolio } from "@/lib/import-pipeline";
+import { parseSacPortfolio } from "@/lib/analysis";
 import { decryptSecret } from "@/lib/crypto";
-import { buildNarrativePrompt, runLlmAnalysis } from "@/lib/llm";
+import { buildNarrativePrompt, runLlmAnalysis } from "@/lib/llm/engine";
 import { buildRuleBasedAnalysisResult } from "@/lib/rule-based-analysis";
 import { buildSemanticTranslationLog } from "@/lib/semantic-translation-log";
 import { createAssetFromAnalysis, getKv, getLlmSettings, getProject } from "@/db/repository";

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { collectJsonFromUpload } from "@/lib/extract-uploads";
-import { parseSacPortfolio } from "@/lib/import-pipeline";
+import { parseSacPortfolio } from "@/lib/analysis";
 import { requireSessionRole } from "@/lib/auth-server";
 
 export async function POST(request: Request) {

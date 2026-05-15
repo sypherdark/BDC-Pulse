@@ -1,3 +1,4 @@
+import type { UploadPayload } from "@/lib/extract-uploads";
 import type { AssetSummary, ParsedFileInsight } from "@/lib/types";
 import { scanSacPayload } from "@/lib/sac-semantic-parser";
 export { PARSER_ENGINE_VERSION } from "@/lib/parser-version";
@@ -387,4 +388,32 @@ export function parseSacAssets(inputFiles: InputFile[]): ParsedPortfolio {
   const files = ordered.map((file) => extractInsight(file.fileName, file.payload));
   const summary = summarizeInsights(files);
   return { files, summary, fileScans };
+}
+
+export type SacParseOutcome =
+  | { ok: true; parsedPortfolio: ParsedPortfolio }
+  | { ok: false; error: string; invalidJson?: string[]; nonSacFiles?: string[] };
+
+/** Validate uploaded SAC JSON payloads before analysis. */
+export function parseSacPortfolio(inputFiles: UploadPayload[]): SacParseOutcome {
+  if (!inputFiles.length) return { ok: false, error: "No SAC JSON payloads found.", invalidJson: [] };
+
+  const parsedPortfolio = parseSacAssets(inputFiles);
+  const nonSacFiles = parsedPortfolio.files
+    .filter((file) => file.assetType === "unknown")
+    .map((file) => file.fileName);
+
+  if (nonSacFiles.length > 0) {
+    return {
+      ok: false,
+      error: `Non-SAC JSON file(s) rejected: ${nonSacFiles.join(", ")}.`,
+      nonSacFiles,
+    };
+  }
+
+  if (!parsedPortfolio.files.some((file) => file.assetType !== "unknown")) {
+    return { ok: false, error: "No SAC export structure detected.", nonSacFiles: [] };
+  }
+
+  return { ok: true, parsedPortfolio };
 }

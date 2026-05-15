@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getLlmSettings } from "@/db/repository";
 import { decryptSecret } from "@/lib/crypto";
-import { testLlmConnection } from "@/lib/llm";
+import { testLlmConnection } from "@/lib/llm/engine";
 import { requireMutateRole } from "@/lib/auth-server";
 
 export async function POST() {
